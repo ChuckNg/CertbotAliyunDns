@@ -14,6 +14,7 @@ Installation
 Execution
 ---------
 .. code-block:: bash
+
     $ certbot certonly --certbot-dns-aliyun:dns-aliyun-propagation-seconds 10  \
                        --certbot-dns-aliyun:dns-aliyun-credentials $PATH_TO_CREDENTIALS/aliyun.json \
                        -d "$YOUR_DOMAIN"
