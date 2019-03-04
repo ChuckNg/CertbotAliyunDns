@@ -2,3 +2,6 @@ aliyun.json
 
 *.swp
 *.log
+
+certbot_dns_aliyun.egg-info/
+**/__pycache__/

@@ -1,4 +1,0 @@
-zope.interface==4.6.0
-certbot
-aliyun-python-sdk-alidns
-aliyun-python-sdk-core-v3

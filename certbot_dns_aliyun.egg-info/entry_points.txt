@@ -1,3 +1,0 @@
-[certbot.plugins]
-dns-aliyun = certbot_dns_aliyun.dns_aliyun:Authenticator
-
