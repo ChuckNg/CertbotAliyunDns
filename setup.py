@@ -6,8 +6,8 @@ VERSION = "0.0.1.dev0"
 INSTALL_REQUIRES = [
     "zope.interface==4.6.0",
     "certbot",
-    "aliyun-python-sdk-alidns==2.0.7",
-    "aliyun-python-sdk-core-v3==2.11.2"
+    "aliyun-python-sdk-alidns",
+    "aliyun-python-sdk-core-v3"
 ]
 
 setup(

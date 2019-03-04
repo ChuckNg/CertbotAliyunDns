@@ -1,5 +1,7 @@
 #-*- coding:utf-8 -*-
-""" DNS Authenticator for Aliyun """
+"""
+    DNS Authenticator for Aliyun
+"""
 import json
 import logging
 
@@ -32,6 +34,9 @@ class Authenticator(dns_common.DNSAuthenticator):
             default=None)
 
     def more_info(self):
+        """
+        : show more infos
+        """
         return "This plugins setup DNS TXT record for dns-01 challenge by using Aliyun API."
 
     def _setup_credentials(self):
@@ -74,8 +79,11 @@ class _AliyunDnsClient():
             LOGGER.error("Aliyun SDK client init failed: %s.", error)
 
     def add_txt_record(self, domain_name, record_name, record_value):
+        """
+        : add TXT domain record for authentication;
+        """
         from aliyunsdkalidns.request.v20150109 import AddDomainRecordRequest
- 
+        #
         request = AddDomainRecordRequest.AddDomainRecordRequest()
         request.set_accept_format("json")
         #
@@ -89,8 +97,11 @@ class _AliyunDnsClient():
                 domain_name, record_name, record_value)
         result = json.loads(self._client.do_action_with_exception(request))
         LOGGER.info("add result: %s.", result)
-    
+
     def delete_txt_record(self, domain_name, record_name, record_value):
+        """
+        : delete TXT domain record for authentication;
+        """
         from aliyunsdkalidns.request.v20150109 \
         import DescribeDomainRecordsRequest, DeleteDomainRecordRequest
 
@@ -108,7 +119,7 @@ class _AliyunDnsClient():
         record_name = record_name.replace(("." + domain_name), "")
         des_request.set_DomainName(domain_name)
         record_first_page_result = json.loads(self._client.do_action_with_exception(des_request))
-        
+        # 
         total_record_count = record_first_page_result["TotalCount"]
         if total_record_count < PAGE_SIZE:
             result = record_first_page_result["DomainRecords"]["Record"]
@@ -141,5 +152,5 @@ class _AliyunDnsClient():
             del_result = json.loads(self._client.do_action_with_exception(del_request))
             LOGGER.info("delete result: %s.", del_result)
         else:
-            raise Exception("%s %s-%s record cannot be found.",\
-                record_name, domain_name, record["Value"])
+            raise Exception("{} {}-{} record cannot be found.".format(
+                record_name, domain_name, record["Value"]))
